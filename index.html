@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#102A28">
-<meta name="description" content="MaskWorth is a masking proxy on hardware in your own building. It detects identifiers and replaces them before an AI request leaves your network, and keeps a record of what was sent, what was masked and who sent it.">
+<meta name="description" content="MaskWorth is a masking proxy: a checkpoint between your people and the AI tool, on hardware in your own building. It gives you a record of every AI request that runs through it: what was sent, what was masked and who sent it.">
 <title>MaskWorth · A record of every AI request · powered by EmpreTECH</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100.00%20100.00%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Cg%20transform%3D%22translate%2850%2C50%29%20scale%281.087%29%20translate%28-50%2C-50%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M22%2C4%20H78%20C88%2C4%2096%2C12%2096%2C22%20V78%20C96%2C88%2088%2C96%2078%2C96%20H22%20C12%2C96%204%2C88%204%2C78%20V22%20C4%2C12%2012%2C4%2022%2C4%20Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2850%2C47%29%20scale%281.12%29%20translate%28-50%2C-47%29%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M9%2C30.5%20C18%2C31.5%2029%2C33%2037%2C36%20C43%2C38.3%2047%2C41%2050%2C44%20C53%2C41%2057%2C38.3%2063%2C36%20C71%2C33%2082%2C31.5%2091%2C30.5%20C92.5%2C45.5%2087%2C60.5%2074%2C66%20C65%2C69.5%2057.5%2C66.5%2053.8%2C61.5%20C52.6%2C59.9%2051.4%2C59.3%2050%2C59.3%20C48.6%2C59.3%2047.4%2C59.9%2046.2%2C61.5%20C42.5%2C66.5%2035%2C69.5%2026%2C66%20C13%2C60.5%207.5%2C45.5%209%2C30.5%20Z%22/%3E%3Cg%20transform%3D%22translate%2829.75%2C46.5%29%20scale%281.3%29%20translate%28-29.75%2C-46.5%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M17.5%2C45%20C23%2C40%2034%2C39.7%2042%2C47%20C35.5%2C53%2023%2C52.5%2017.5%2C45%20Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2870.25%2C46.5%29%20scale%281.3%29%20translate%28-70.25%2C-46.5%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M82.5%2C45%20C77%2C40%2066%2C39.7%2058%2C47%20C64.5%2C53%2077%2C52.5%2082.5%2C45Z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -125,6 +125,7 @@ section.s>.in{width:100%}
 .mfoot b{color:var(--ink);font-variant-numeric:tabular-nums}
 .mfoot .sent{font-weight:600;color:var(--green);opacity:0;transition:opacity .5s;white-space:nowrap}
 .mfoot .sent.on{opacity:1}
+.mlead{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--mint);margin:0 0 14px}
 .mcap{font-size:12px;color:rgba(255,255,255,.45);margin-top:12px;text-align:right}
 
 /* problem */
@@ -173,7 +174,7 @@ section.s>.in{width:100%}
 .second p{margin:10px 0 0 !important;color:rgba(255,255,255,.72);font-size:15.5px !important}
 
 /* how it works */
-.how{display:grid;grid-template-columns:.6fr 1.4fr;gap:48px;align-items:center}
+.how{display:grid;grid-template-columns:.6fr 1.4fr;gap:48px;align-items:start}
 #hList{list-style:none;padding:0;margin:0;counter-reset:h}
 #hList li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--border);opacity:.32;transform:translateX(-6px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 #hList li:last-child{border-bottom:1px solid var(--border)}
@@ -389,7 +390,7 @@ input[type=range]{width:100%;accent-color:var(--green);height:28px;margin:0 0 20
 
 /* scope */
 .scope .card h3{font-size:25px}
-.scope .card .fp{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);font-size:14px;color:var(--soft)}
+.scope .card .fp{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);font-size:16px;color:var(--muted)}
 
 /* faq */
 .faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:60px;align-items:start}
@@ -474,7 +475,8 @@ footer p b{color:#fff;font-weight:600}
   .tnote{padding:14px 22px 20px}
   .console{padding:12px;border-radius:16px}
   .tabs{width:100%}
-  .tabs button{flex:1;justify-content:center;padding:8px 5px;font-size:12px;white-space:normal;line-height:1.25;text-align:center}
+  .tabs button{flex:1;justify-content:center;padding:8px 10px;font-size:12.5px;white-space:nowrap}
+  .tabs button[data-v="raw"]{display:none}
   .tabs button i{display:none}
   .console{overflow:hidden}
   .chead{white-space:normal;flex-wrap:wrap;row-gap:2px}
@@ -518,17 +520,18 @@ footer p b{color:#fff;font-weight:600}
   <div class="grid" aria-hidden="true"></div>
   <div class="in">
     <div>
-      <div class="eyebrow">A masking proxy in your own building</div>
+      <div class="eyebrow">Runs in your own building</div>
       <h1><span class="l"><span>Your people are</span></span><span class="l"><span>already using AI.</span></span><span class="l"><span class="acc">Keep a record of it.</span></span></h1>
       <p class="lead">MaskWorth gives you a record of every AI request that runs through it: what was sent, what was masked, and who sent it.</p>
       <div class="btns"><a class="btn" href="#how">See how it works</a><a class="btn ghost" href="#pricing">Pricing</a></div>
       <div class="facts">
-        <div><span class="lab">What it is</span><span>A masking proxy on hardware in your own building. It detects identifiers and replaces them before a request leaves your network.</span></div>
+        <div><span class="lab">What it is</span><span>A masking proxy: a checkpoint between your people and the AI tool, on hardware in your own building. It detects identifiers and replaces them before a request leaves your network.</span></div>
         <div><span class="lab">How it's priced</span><span>From USD 100 per seat per month. A seat is one named user whose AI traffic runs through MaskWorth.</span></div>
         <div><span class="lab">Why now</span><span>AI is already in use, and today nobody can show what was sent or who sent it.</span></div>
       </div>
     </div>
     <div>
+      <div class="mlead">Illustration with example data: what happens to a prompt</div>
       <div class="mockwrap">
       <div class="mock" aria-label="Illustration: identifiers in a prompt are replaced with pseudonyms before the request leaves the network">
         <div class="mtop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.00 100.00" width="100" height="100"><g transform="translate(50,50) scale(1.087) translate(-50,-50)"><path fill="#1E5A55" d="M22,4 H78 C88,4 96,12 96,22 V78 C96,88 88,96 78,96 H22 C12,96 4,88 4,78 V22 C4,12 12,4 22,4 Z"/></g><g transform="translate(50,47) scale(1.12) translate(-50,-47)"><path fill="#FFFFFF" d="M9,30.5 C18,31.5 29,33 37,36 C43,38.3 47,41 50,44 C53,41 57,38.3 63,36 C71,33 82,31.5 91,30.5 C92.5,45.5 87,60.5 74,66 C65,69.5 57.5,66.5 53.8,61.5 C52.6,59.9 51.4,59.3 50,59.3 C48.6,59.3 47.4,59.9 46.2,61.5 C42.5,66.5 35,69.5 26,66 C13,60.5 7.5,45.5 9,30.5 Z"/><g transform="translate(29.75,46.5) scale(1.3) translate(-29.75,-46.5)"><path fill="#1E5A55" d="M17.5,45 C23,40 34,39.7 42,47 C35.5,53 23,52.5 17.5,45 Z"/></g><g transform="translate(70.25,46.5) scale(1.3) translate(-70.25,-46.5)"><path fill="#1E5A55" d="M82.5,45 C77,40 66,39.7 58,47 C64.5,53 77,52.5 82.5,45Z"/></g></g></svg><b>MaskWorth</b><div class="st"><i></i><span id="mSt">Detecting</span></div></div>
@@ -539,7 +542,6 @@ footer p b{color:#fff;font-weight:600}
         <div class="mfoot"><span>Identifiers masked: <b id="mN">0</b> of 6</span><span class="sent" id="mSent">Masked text is sent</span></div>
       </div>
       </div>
-      <div class="mcap">Illustration. Example data.</div>
     </div>
   </div>
   <div class="scroll" aria-hidden="true"><span>scroll</span><i></i></div>
@@ -547,8 +549,8 @@ footer p b{color:#fff;font-weight:600}
 
 <section class="s wht" id="problem">
   <div class="in">
-    <div class="hd rv"><div class="eyebrow"><b>01</b> The problem</div><h2>Not as a decision anyone made, but as something that <em class="i">simply happened.</em></h2>
-      <p>Some of it happens on personal accounts and personal devices, which is why most firms cannot tell how much of it is happening.</p></div>
+    <div class="hd rv"><div class="eyebrow"><b>01</b> The problem</div><h2>Your people are already using AI. <em class="i">Not as a decision anyone made.</em></h2>
+      <p>The use simply happened. Some of it runs on personal accounts and personal devices, which is why most firms cannot tell how much of it is happening.</p></div>
     <div class="cards3">
       <div class="card rv d1"><div class="num">01</div><h3>Nobody decided it</h3><p>The tools come in through the people who use them, and use keeps growing.</p></div>
       <div class="card rv d2"><div class="num">02</div><h3>It reaches the work that matters</h3><p>The biggest time savings are in exactly the material nobody wants leaving the building in a prompt.</p></div>
@@ -600,7 +602,7 @@ footer p b{color:#fff;font-weight:600}
           <div class="stat"><b class="cnt" data-n="1" data-dec="0" data-pre="" data-suf=" in 5">1 in 5</b><span>Organizations studied that reported a breach involving shadow AI</span></div>
           <div class="stat"><b class="cnt" data-n="670000" data-dec="0" data-pre="USD " data-suf="">USD 670,000</b><span>Added per breach at organizations with high shadow-AI levels</span></div>
         </div>
-        <div class="srcline">Source: IBM, Cost of a Data Breach Report 2025. First figure: financial industry, global average. Other figures: all industries.</div>
+        <div class="srcline">Shadow AI: AI use the firm has not approved or cannot see.<br>Source: IBM, Cost of a Data Breach Report 2025. First figure: financial industry, global average. Other figures: all industries.</div>
       </div>
     </div>
   </div>
@@ -716,7 +718,7 @@ footer p b{color:#fff;font-weight:600}
         <div class="eyebrow"><b>05</b> Evidence</div>
         <h2 style="font-size:clamp(34px,4.1vw,54px);line-height:1.06;margin:0 0 22px">Detection in the <em class="i">console</em></h2>
         <p>Detected entities are tagged before the request is sent, so the firm has a record, not an assumption.</p>
-        <p>Detection is calibrated by language and by document type. So every deployment starts by measuring a representative sample of your own data. Acceptance criteria are agreed before production use: the detection results MaskWorth must reach before your people rely on it.</p>
+        <p>Detection is calibrated by language and by document type, so every deployment starts by measuring a representative sample of your own data. Acceptance criteria are agreed before production use: the detection results MaskWorth must reach before your people rely on it.</p>
         <p class="honest">Detection is not infallible. The figure that counts is the one measured on your own sample in the trial month.</p>
       </div>
       <div class="rv d1">
@@ -730,7 +732,7 @@ footer p b{color:#fff;font-weight:600}
             <div class="cview" data-v="raw"><div class="chead"><span class="ring"></span>Raw ingest context</div><div class="rawt">"Subject: Employment Agreement Confirmation for Jonathan Sample (SSN: 900-12-3456). Please confirm the compensation package paid to account 000123456789 and the home address 100 Sample Street, Miami, FL 33131 on file with employer Example Holdings LLC (EIN: 12-3456789)."</div></div>
             <div class="cview on" data-v="det"><div class="chead"><span class="ring"></span>Real-time detection <span id="cCount">&bull; 6 Entities Detected</span><button class="copy" id="copyP">Copy Payload</button></div><div class="ctext" id="cText">"Subject: Employment Agreement Confirmation for <span class="chip2" tabindex="0">Jonathan Sample<small>PERSON #1</small><span class="tip"><b>PERSON #1</b>Person name</span></span> (SSN: <span class="chip2" tabindex="0">900-12-3456<small>SSN #1</small><span class="tip"><b>SSN #1</b>Social Security number</span></span>). Please confirm the compensation package paid to account <span class="chip2" tabindex="0">000123456789<small>ACCOUNT #1</small><span class="tip"><b>ACCOUNT #1</b>Account number</span></span> and the home address <span class="chip2" tabindex="0">100 Sample Street, Miami, FL 33131<small>ADDR #1</small><span class="tip"><b>ADDR #1</b>Address</span></span> on file with employer <span class="chip2" tabindex="0">Example Holdings LLC<small>ORG #1</small><span class="tip"><b>ORG #1</b>Organization</span></span> (EIN: <span class="chip2" tabindex="0">12-3456789<small>EIN #1</small><span class="tip"><b>EIN #1</b>Employer Identification Number</span></span>)."</div></div>
           </div>
-          <div class="ccap"><span>Example data.</span></div>
+          <div class="ccap"><span id="cCap">Names and numbers are replaced by labels, such as PERSON #1, before the request leaves your network. Hover a highlighted value to see its type. Example data.</span></div>
         </div>
       </div>
     </div>
@@ -747,7 +749,7 @@ footer p b{color:#fff;font-weight:600}
         <div class="three">
           <div><b>What was sent</b><span>Every request that runs through MaskWorth is logged.</span></div>
           <div><b>What was masked</b><span>The identifiers that were replaced before it left.</span></div>
-          <div><b>Who sent it</b><span>A seat is one named user whose AI traffic runs through the proxy.</span></div>
+          <div><b>Who sent it</b><span>The seat, meaning the named user, that sent the request.</span></div>
         </div>
         <p style="font-size:16px">The mapping and logs are stored on your own appliance.</p>
         <p class="judg">Whether that satisfies the firm's professional and regulatory obligations is the firm's judgment to make; what MaskWorth delivers is the evidence to make it with.</p>
@@ -790,7 +792,7 @@ footer p b{color:#fff;font-weight:600}
     <div class="nocloud rv"><span>No third-party cloud</span><span>No monthly infrastructure fee</span></div>
     <div class="opts">
       <div class="opt rec rv d1"><span class="lab">Option A · Recommended</span><h3>We deliver it, turnkey</h3>
-        <ol><li>We size the appliance for your volumes</li><li>We procure and prepare it</li><li>We commission it remotely with your team</li><li>We hand over a working, documented setup</li></ol>
+        <ol><li>We size the appliance for your volumes</li><li>We procure and prepare it</li><li>We set it up and bring it into service remotely, with your team</li><li>We hand over a working, documented setup</li></ol>
         <div class="foot">You provide rack space, power and a network port. Hardware is invoiced separately at cost; the one-time implementation fee covers the work.</div></div>
       <div class="opt rv d2"><span class="lab">Option B · If your policy requires it</span><h3>You buy and run it</h3>
         <ol><li>We provide the specification</li><li>You procure and install it</li><li>You manage the appliance</li><li>We install and support the software on it</li></ol>
@@ -826,9 +828,9 @@ footer p b{color:#fff;font-weight:600}
         <div class="orow"><span>License per year<small id="oLicNote">30 seats at USD 100 per seat per month</small></span><b id="oLic">USD 36,000</b></div>
         <div class="orow"><span>Implementation<small>One-time fee, invoiced on signing</small></span><b id="oImp">USD 9,500</b></div>
         <div class="orow"><span>Implementation credit<small id="oCredNote">Credited against later license invoices once the trial month has closed with the acceptance criteria met</small></span><b id="oCred">USD 9,500</b></div>
-        <div class="orow tot"><span>Year one</span><b id="oY1">USD 36,000</b></div>
-        <div class="orow two"><span>Commitment over the term<small id="oTermNote">Two years of license, implementation net of credit</small></span><b id="oTerm">USD 72,000</b></div>
-        <p class="disc">Indicative pricing. Final prices are confirmed in the agreement. USD, excluding taxes. Hardware under Option A is invoiced separately at cost. Any month that starts before your two administrators are named and trained is billed at the fully managed rate.</p>
+        <div class="orow tot"><span id="oY1L">Year one, at least</span><b id="oY1">USD 36,000</b></div>
+        <div class="orow two"><span><span id="oTermL">Commitment over the term, at least</span><small id="oTermNote">Two years of license, implementation net of credit</small></span><b id="oTerm">USD 72,000</b></div>
+        <p class="disc">Indicative pricing. Final prices are confirmed in the agreement. USD, excluding taxes. Hardware under Option A is invoiced separately at cost. At the self-managed rate these are minimums: any month that starts before your two administrators are named and trained is billed at the fully managed rate, and the difference comes on top.</p>
       </div>
     </div>
 
@@ -916,10 +918,10 @@ footer p b{color:#fff;font-weight:600}
       <div class="qa rv d1">
         <details open><summary>Does client data leave our building?<i></i></summary><p>Before a request leaves the network, MaskWorth detects names, email addresses, account numbers and other identifiers and replaces them with consistent pseudonyms. The masked text is sent to the model; the real values are restored in the answer. The mapping between the two stays on your hardware. Detection is not infallible, which is why every deployment starts with a measurement on your own data.</p></details>
         <details><summary>Is detection perfect?<i></i></summary><p>No. Detection rates depend on language and document type, so they are measured on your own data rather than quoted as a generic figure. The figure that counts is the one measured on your own sample in the trial month, and the acceptance criteria are written against it.</p></details>
-        <details><summary>What if the trial month does not meet the criteria?<i></i></summary><p>You can end the agreement at the close of the trial month. You then owe the implementation fee, the license for the trial month and any hardware already procured, and nothing further.</p></details>
+        <details><summary>What if the trial month does not meet the criteria?<i></i></summary><p>You can end the agreement at the close of the trial month. What you then owe is set out under Getting started above and in the terms under Pricing.</p></details>
         <details><summary>Do you resell model usage?<i></i></summary><p>No. Model usage runs under your own agreement with the model provider. MaskWorth does not resell it or charge for it.</p></details>
         <details><summary>Where does it run?<i></i></summary><p>On dedicated hardware inside your own data center or server room. It does not run in a third-party cloud, and MaskWorth charges no monthly infrastructure fee.</p></details>
-        <details><summary>Which AI tools can our people keep using?<i></i></summary><p>Users keep working in the supported AI tools, as agreed during intake.</p></details>
+        <details><summary>Does MaskWorth see AI use on personal phones or personal accounts?<i></i></summary><p>No. MaskWorth records the AI traffic that runs through it. Use on personal accounts and personal devices has no log at all, which is exactly the gap the firm carries today.</p></details>
         <details><summary>Who handles support?<i></i></summary><p>Self-managed: your two named, trained administrators handle first-line support and day-to-day administration; we handle second- and third-line support, updates and releases. Fully managed: we handle all lines of support, updates and releases.</p></details>
         <details><summary>What happens to the mapping and logs if we stop?<i></i></summary><p>They are stored on your own appliance. Remote support access is under your control and is set out in the agreement. On termination, you delete them there, with our help on request.</p></details>
       </div>
@@ -1076,6 +1078,7 @@ function playEvidence(){
   evTimers.push(setTimeout(() => { chips[0].classList.add('act'); state.evidence = true; }, T(1700 + chips.length * 380 + 300)));
   evTimers.push(setTimeout(() => chips[0].classList.remove('act'), T(1700 + chips.length * 380 + 2600)));
 }
+if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Names and numbers are replaced by labels, such as PERSON #1, before the request leaves your network. Tap a highlighted value to see its type. Example data.';
 $('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'PERSON #1').replace(/900-12-3456/,'SSN #1').replace(/000123456789/,'ACCOUNT #1').replace(/100 Sample Street, Miami, FL 33131/,'ADDR #1').replace(/Example Holdings LLC/,'ORG #1').replace(/12-3456789/,'EIN #1'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
 chips.forEach(c => c.classList.add('on'));
 once($('console'), playEvidence, .5);
@@ -1094,6 +1097,8 @@ function renderCalc(){
   $('oCred').textContent = f.cr ? '- ' + usd(f.cr) : 'None';
   $('oCredNote').textContent = calc.term === 1 ? 'No credit on a one-year term' : f.cr === 9500 ? 'Full fee credited: 30 or more seats on a two-year term, after the trial month has closed with the criteria met' : f.cr ? 'Half credited: 20 or more seats on a two-year term, after the trial month has closed with the criteria met' : 'Credit starts at 20 seats on a two-year term';
   $('oY1').textContent = usd(f.y1);
+  $('oY1L').textContent = calc.rate === 100 ? 'Year one, at least' : 'Year one';
+  $('oTermL').textContent = calc.rate === 100 ? 'Commitment over the term, at least' : 'Commitment over the term';
   $('oTerm').textContent = usd(f.total);
   $('oTermNote').textContent = calc.term === 2 ? 'Two years of license, implementation net of credit' : 'Minimum term of one year';
 }
