@@ -471,7 +471,7 @@ section.s.short{min-height:0;padding:104px 0}
 .side3>div{background:#fff;color:var(--text);border-radius:16px;padding:16px 18px;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .side3 .dim{opacity:.35;transform:translateY(4px)}
 .side3 h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 8px}
-.mapl{height:118px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.7}
+.mapl{height:166px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.7}
 .mapl div{display:grid;grid-template-columns:1.15fr .8fr 1.15fr;gap:10px;border-bottom:1px dashed #e2eae7}
 .mapl div span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mapl div span:nth-child(2){color:var(--green);font-weight:700}
@@ -567,6 +567,7 @@ section.s.short{min-height:0;padding:104px 0}
   .rv{opacity:1;transform:none}
   .hero h1 .l span{transform:none}
 }
+@media (max-width:520px){.ttlp{display:none}}
 </style>
 </head>
 <body>
@@ -785,7 +786,7 @@ section.s.short{min-height:0;padding:104px 0}
     <div class="trysteps rv" id="trySteps"><span>1 Detect</span><span>2 Label</span><span>3 Stand-in</span><span>4 Send</span><span>5 Restore</span></div>
     <div class="trygrid" id="demo">
       <div class="term rv">
-        <div class="thead"><div class="dots"><i></i><i></i><i></i></div><div class="ttl">AI tool &middot; via MaskWorth</div><div class="tag"><i></i>illustration</div></div>
+        <div class="thead"><div class="dots"><i></i><i></i><i></i></div><div class="ttl"><span class="ttlp">AI tool &middot; </span>via MaskWorth</div><div class="tag"><i></i>illustration</div></div>
         <div class="tbody">
           <div class="exs" id="tryEx"></div>
           <label class="tlab" for="tryIn">What the user types</label>
