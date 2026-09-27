@@ -464,6 +464,7 @@ section.s.short{min-height:0;padding:104px 0}
 .tpane{margin-top:14px;border-top:1px solid rgba(158,211,200,.12);padding-top:12px;transition:opacity .5s var(--ease)}
 .tout{height:150px;overflow:auto;font-family:var(--mono);font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.82);white-space:pre-wrap;word-break:break-word}
 .ps{background:rgba(63,167,150,.22);color:var(--mint);border-radius:4px;padding:1px 5px;font-weight:600}
+.rd{background:rgba(255,255,255,.1);color:#fff;border-radius:4px;padding:1px 5px;font-weight:600}
 .rv2{background:rgba(158,211,200,.16);color:#fff;border-radius:4px;padding:1px 5px;box-shadow:inset 0 0 0 1px rgba(158,211,200,.35)}
 .tfoot{font-family:var(--mono);font-size:12px;color:var(--mint);margin-top:10px;height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .side3{display:flex;flex-direction:column;gap:14px}
@@ -471,9 +472,11 @@ section.s.short{min-height:0;padding:104px 0}
 .side3 .dim{opacity:.35;transform:translateY(4px)}
 .side3 h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 8px}
 .mapl{height:118px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.7}
-.mapl div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #e2eae7}
-.mapl div span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mapl div span:last-child{color:var(--green);font-weight:700;white-space:nowrap}
+.mapl div{display:grid;grid-template-columns:1.15fr .8fr 1.15fr;gap:10px;border-bottom:1px dashed #e2eae7}
+.mapl div span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mapl div span:nth-child(2){color:var(--green);font-weight:700}
+.mapl div.mh span{font-family:var(--font);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;border:0}
+.mapl .none{display:block;font-family:var(--font);color:var(--muted)}
 .ans{height:96px;overflow:auto;font-size:15px;line-height:1.7}
 .ans .ps{background:rgba(30,90,85,.12);color:var(--green)}
 .ans .rv2{background:rgba(63,167,150,.18);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(63,167,150,.5)}
@@ -785,13 +788,14 @@ function setHow(act, done){
   hLines.forEach(l => lineState(l, +l.dataset.k <= act));
   hChips.forEach(c => c.classList.toggle('hl', act >= 0));
   const cur = hItems[Math.max(0, act)];
-  if (cur){ $('howCap').querySelector('.k').textContent = 'Step ' + (Math.max(0,act)+1) + ' of 6'; $('howCap').querySelector('.v').textContent = cur.querySelector('b').textContent; }
+  if (cur){ $('howCap').querySelector('.k').textContent = 'Step ' + (Math.max(0,act)+1) + ' of ' + hItems.length; $('howCap').querySelector('.v').textContent = cur.querySelector('b').textContent; }
 }
 let howTimers = [];
 function playHow(){
   howTimers.forEach(clearTimeout); howTimers = []; setHow(-1, false); $('how').classList.remove('done');
-  for (let k = 0; k < 6; k++) howTimers.push(setTimeout(() => setHow(k, false), T(400 + k * 1400)));
-  howTimers.push(setTimeout(() => { setHow(5, true); $('how').classList.add('done'); state.how = true; }, T(400 + 6 * 1400)));
+  const N = hItems.length;
+  for (let k = 0; k < N; k++) howTimers.push(setTimeout(() => setHow(k, false), T(400 + k * 1300)));
+  howTimers.push(setTimeout(() => { setHow(N - 1, true); $('how').classList.add('done'); state.how = true; }, T(400 + N * 1300)));
 }
 setHow(-1, false);
 $('howPlay').addEventListener('click', playHow);
@@ -813,7 +817,7 @@ function playEvidence(){
   evTimers.push(setTimeout(() => { chips[0].classList.add('act'); state.evidence = true; }, T(1700 + chips.length * 380 + 300)));
   evTimers.push(setTimeout(() => chips[0].classList.remove('act'), T(1700 + chips.length * 380 + 2600)));
 }
-if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Names and numbers are replaced by labels, such as PERSON #1, before the request leaves your network. Tap a highlighted value to see its type. Example data.';
+if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Each detected value gets a label, such as PERSON #1. Before the request leaves your network, each label becomes a realistic stand-in. Tap a highlighted value to see its type. Example data.';
 $('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'PERSON #1').replace(/900-12-3456/,'SSN #1').replace(/000123456789/,'ACCOUNT #1').replace(/100 Sample Street, Miami, FL 33131/,'ADDR #1').replace(/Example Holdings LLC/,'ORG #1').replace(/12-3456789/,'EIN #1'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
 chips.forEach(c => c.classList.add('on'));
 once($('console'), playEvidence, .5);
@@ -852,10 +856,12 @@ if ($('demo')) {
   const EX = [
     ['Engagement letter', 'Review the engagement letter for Jonathan Sample, account 000123456789, and list anything that is missing.'],
     ['Employment confirmation', 'Subject: Employment Agreement Confirmation for Jonathan Sample (SSN: 900-12-3456). Please confirm the compensation package paid to account 000123456789 and the home address 100 Sample Street, Miami, FL 33131 on file with employer Example Holdings LLC (EIN: 12-3456789).'],
-    ['Client email', 'Draft a short reply to Jonathan Sample (jonathan.sample@example.com) about the payment from Example Holdings LLC to account 000123456789.']
+    ['Client email', 'Draft a short reply to Jonathan Sample (jonathan.sample@example.com) about the payment from Example Holdings LLC to account 000123456789.'],
+    ['Request with a key', 'Why does this request fail? It uses the key sk-test-4fJ9qLx2Vm7RtZ8w for the export of account 000123456789.']
   ];
-  const STOP = new Set('Subject Employment Agreement Confirmation Please Review Draft Dear Hello Thanks Regards The This That Summarize Tax Return Form Invoice Account Payment Letter Engagement Client Firm Report Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March April May June July August September October November December United States New York Street Avenue Road Internal Revenue Service Social Security Kind Best Many Could Would Should Can Will'.split(' '));
+  const STOP = new Set('Subject Employment Agreement Confirmation Please Review Draft Dear Hello Thanks Regards The This That Summarize Tax Return Form Invoice Account Payment Letter Engagement Client Firm Report Why Does It Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March April May June July August September October November December United States New York Street Avenue Road Internal Revenue Service Social Security Kind Best Many Could Would Should Can Will'.split(' '));
   const PAT = [
+    ['SECRET', /\b(?:sk|pk|rk)[-_](?:live[-_]|test[-_])?[A-Za-z0-9]{12,}\b/g],
     ['EMAIL', /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g],
     ['SSN', /\b\d{3}-\d{2}-\d{4}\b/g],
     ['EIN', /\b\d{2}-\d{7}\b/g],
@@ -864,6 +870,17 @@ if ($('demo')) {
     ['ORG', /\b(?:[A-Z][A-Za-z&]+ ){1,3}(?:LLC|Inc\.?|Ltd\.?|LLP|Corp\.?)(?![A-Za-z])/g],
     ['PERSON', /\b[A-Z][a-z]+(?: [A-Z]\.)? [A-Z][a-z]+(?:-[A-Z][a-z]+)?\b/g]
   ];
+  // made-up stand-ins, same kind and format as the original
+  const POOL = {PERSON: ['Daniel Price', 'Laura Bennett', 'Marcus Hale', 'Olivia Grant'], ORG: ['Northwind Partners LLC', 'Harbor Lane Group LLC', 'Bluefield Advisors LLC'],
+    EMAIL: ['daniel.price@example.org', 'l.bennett@example.net', 'm.hale@example.org'], ADDR: ['48 Maple Court, Riverside, FL 33000', '12 Cedar Lane, Lakeview, FL 33001']};
+  const FIX = {ACCOUNT: ['000482913577', '000731906248'], SSN: ['900-45-7812', '900-67-2193'], EIN: ['98-7654321', '97-1203456']};
+  function digitsLike(v, n){ let seed = n * 7919 + v.length * 104729, out = ''; for (const c of v){ if (/\d/.test(c)){ seed = (seed * 16807) % 2147483647; out += seed % 10; } else out += c; } return out; }
+  function standIn(type, v, n){
+    if (type === 'SECRET') return '[REDACTED]';
+    if (POOL[type]) return POOL[type][(n - 1) % POOL[type].length];
+    if (FIX[type]){ const f = FIX[type][(n - 1) % FIX[type].length]; return f.length === v.length ? f : digitsLike(v, n); }
+    return digitsLike(v, n);
+  }
   const esc = t => t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
   function detect(text){
     let all = [];
@@ -873,47 +890,56 @@ if ($('demo')) {
     all.sort((a, b) => a.s - b.s || (b.e - b.s) - (a.e - a.s));
     const keep = []; let end = -1; all.forEach(x => { if (x.s >= end){ keep.push(x); end = x.e; } });
     const map = new Map(), cnt = {};
-    keep.forEach(x => { if (!map.has(x.v)){ cnt[x.type] = (cnt[x.type] || 0) + 1; map.set(x.v, x.type + ' #' + cnt[x.type]); } x.label = map.get(x.v); });
+    keep.forEach(x => { if (!map.has(x.v)){ cnt[x.type] = (cnt[x.type] || 0) + 1; const n = cnt[x.type]; map.set(x.v, {type: x.type, label: x.type === 'SECRET' ? 'removed' : x.type + ' #' + n, stand: standIn(x.type, x.v, n)}); } x.m = map.get(x.v); });
     return {hits: keep, map};
   }
-  function render(text, hits, mode){
+  function render(text, hits){
     let out = '', k = 0;
-    hits.forEach(h => { out += esc(text.slice(k, h.s)); out += mode === 'mask' ? '<span class="ps">' + h.label + '</span>' : '<span class="rv2">' + esc(h.v) + '</span>'; k = h.e; });
+    hits.forEach(h => { out += esc(text.slice(k, h.s)); out += h.m.type === 'SECRET' ? '<span class="rd">[REDACTED]</span>' : '<span class="ps">' + esc(h.m.stand) + '</span>'; k = h.e; });
     return out + esc(text.slice(k));
   }
-  function answerFor(map){
-    const labels = [...map.values()];
-    if (!labels.length) return null;
-    const who = labels.find(l => l.startsWith('PERSON')) || labels[0];
-    const rest = labels.filter(l => l !== who);
-    return 'Here is a draft for ' + who + '.' + (rest.length ? ' It uses ' + rest.join(', ') + ' exactly as you gave them.' : '');
+  function answerParts(map){
+    const vals = [...map.entries()].filter(([, m]) => m.type !== 'SECRET');
+    if (!vals.length) return null;
+    const who = vals.find(([, m]) => m.type === 'PERSON') || vals[0];
+    const rest = vals.filter(x => x !== who);
+    return {who, rest};
+  }
+  function answerHtml(parts, real){
+    if (!parts) return real ? 'Nothing to restore.' : 'The model received the text without identifiers found by these patterns.';
+    const cls = real ? 'rv2' : 'ps', val = x => '<span class="' + cls + '">' + esc(real ? x[0] : x[1].stand) + '</span>';
+    if (parts.who[1].type !== 'PERSON') return 'Here is the answer. It uses ' + [parts.who, ...parts.rest].map(val).join(', ') + ' exactly as you gave them.';
+    return 'Here is a draft for ' + val(parts.who) + '.' + (parts.rest.length ? ' It uses ' + parts.rest.map(val).join(', ') + ' exactly as you gave them.' : '');
   }
   const inp = $('tryIn'), steps = [...document.querySelectorAll('#trySteps span')];
   const panes = [$('tryOutP'), $('tryMapP'), $('tryAnsP'), $('tryResP')];
-  let timers = [], exI = 0;
+  let timers = [];
   $('tryEx').innerHTML = EX.map((e, i) => '<button type="button" data-i="' + i + '">' + e[0] + '</button>').join('');
   const exBtns = [...$('tryEx').querySelectorAll('button')];
   function setStep(n){ steps.forEach((x, i) => x.classList.toggle('on', i < n)); }
   function run(animate){
     timers.forEach(clearTimeout); timers = [];
-    const text = inp.value, r = detect(text), ans = answerFor(r.map);
-    const masked = render(text, r.hits, 'mask');
-    const mapHtml = r.hits.length ? [...r.map.entries()].map(([v, l]) => '<div><span>' + esc(v) + '</span><span>' + l + '</span></div>').join('') : '<div><span>No identifiers found by the simple patterns on this page.</span><span></span></div>';
-    const back = ans ? ans.replace(/(PERSON|EMAIL|SSN|EIN|ADDR|ACCOUNT|ORG) #\d+/g, l => { const v = [...r.map.entries()].find(e => e[1] === l); return '<span class="rv2">' + esc(v ? v[0] : l) + '</span>'; }) : 'Nothing to restore.';
-    const ansHtml = ans ? ans.replace(/(PERSON|EMAIL|SSN|EIN|ADDR|ACCOUNT|ORG) #\d+/g, l => '<span class="ps">' + l + '</span>') : 'The model received the text as typed.';
+    const text = inp.value, r = detect(text), parts = answerParts(r.map);
+    const secrets = r.hits.filter(h => h.m.type === 'SECRET').length, ids = r.hits.length - secrets;
+    const mapHead = '<div class="mh"><span>Original</span><span>Label</span><span>Stand-in</span></div>';
+    const kept = [...r.map.entries()].filter(([, m]) => m.type !== 'SECRET');
+    const labelRows = kept.map(([v, m]) => '<div><span>' + esc(v) + '</span><span>' + m.label + '</span><span></span></div>').join('');
+    const fullRows = kept.map(([v, m]) => '<div><span>' + esc(v) + '</span><span>' + m.label + '</span><span>' + esc(m.stand) + '</span></div>').join('');
+    const none = '<span class="none">No identifiers found by the simple patterns on this page.</span>';
+    const summary = ids + ' identifier' + (ids === 1 ? '' : 's') + (secrets ? ', ' + secrets + ' secret removed' : '');
     const acts = [
-      () => { setStep(1); $('tryFoot').textContent = r.hits.length + ' identifier' + (r.hits.length === 1 ? '' : 's') + ' found'; },
-      () => { setStep(2); $('tryOut').innerHTML = masked; panes[0].style.opacity = 1; },
-      () => { setStep(3); $('tryMap').innerHTML = mapHtml; panes[1].classList.remove('dim'); },
-      () => { setStep(4); $('tryAns').innerHTML = ansHtml; panes[2].classList.remove('dim'); $('tryFoot').textContent = r.hits.length + ' masked, masked text sent'; },
-      () => { setStep(5); $('tryRes').innerHTML = back; panes[3].classList.remove('dim'); state.demo = true; }
+      () => { setStep(1); $('tryFoot').textContent = summary + ' found'; },
+      () => { setStep(2); $('tryMap').innerHTML = kept.length ? mapHead + labelRows : none; panes[1].classList.remove('dim'); },
+      () => { setStep(3); $('tryMap').innerHTML = kept.length ? mapHead + fullRows : none; $('tryOut').innerHTML = render(text, r.hits); panes[0].style.opacity = 1; },
+      () => { setStep(4); $('tryAns').innerHTML = answerHtml(parts, false); panes[2].classList.remove('dim'); $('tryFoot').textContent = summary + ', sent with stand-ins'; },
+      () => { setStep(5); $('tryRes').innerHTML = answerHtml(parts, true); panes[3].classList.remove('dim'); state.demo = true; }
     ];
     if (!animate){ acts.forEach(f => f()); return; }
     setStep(0); $('tryOut').innerHTML = esc(text); panes[0].style.opacity = .45; panes.slice(1).forEach(x => x.classList.add('dim'));
     $('tryMap').innerHTML = ''; $('tryAns').innerHTML = ''; $('tryRes').innerHTML = ''; $('tryFoot').textContent = 'scanning';
     acts.forEach((f, i) => timers.push(setTimeout(f, T(500 + i * 900))));
   }
-  function pick(i){ exI = i; exBtns.forEach((b, k) => b.classList.toggle('on', k === i)); inp.value = EX[i][1]; run(true); }
+  function pick(i){ exBtns.forEach((b, k) => b.classList.toggle('on', k === i)); inp.value = EX[i][1]; run(true); }
   exBtns.forEach((b, i) => b.addEventListener('click', () => pick(i)));
   let deb = null; inp.addEventListener('input', () => { exBtns.forEach(b => b.classList.remove('on')); clearTimeout(deb); deb = setTimeout(() => run(true), 600); });
   inp.value = EX[1][1]; exBtns[1].classList.add('on'); run(false); state.demo = false;
@@ -922,7 +948,7 @@ if ($('demo')) {
 }
 
 // ---------- QA hooks (engine/qa.js) ----------
-window.QA_PAUSE = {stmt: 3800, how: 10500, try: 6500, evidence: 5200, cost: 2600};
+window.QA_PAUSE = {stmt: 3800, how: 11500, try: 6500, evidence: 5200, cost: 2600};
 window.QA_END = () => { const r = {};
   if ($('quote')) r.quote = state.quote && [...document.querySelectorAll('#quote .w')].every(w => w.classList.contains('on'));
   if ($('how')) r.how = state.how && $('how').classList.contains('done');

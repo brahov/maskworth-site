@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#102A28">
-<meta name="description" content="MaskWorth is a masking proxy: a checkpoint between your people and the AI tool, on hardware in your own building. It gives you a record of every AI request that runs through it: what was sent, what was masked and who sent it.">
+<meta name="description" content="MaskWorth is a masking proxy: a locally hosted checkpoint between your people and the AI tool, on hardware in your own building. It gives you a record of every AI request that runs through it: what was sent, what was masked and who sent it.">
 <title>MaskWorth · A record of every AI request · powered by EmpreTECH</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100.00%20100.00%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Cg%20transform%3D%22translate%2850%2C50%29%20scale%281.087%29%20translate%28-50%2C-50%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M22%2C4%20H78%20C88%2C4%2096%2C12%2096%2C22%20V78%20C96%2C88%2088%2C96%2078%2C96%20H22%20C12%2C96%204%2C88%204%2C78%20V22%20C4%2C12%2012%2C4%2022%2C4%20Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2850%2C47%29%20scale%281.12%29%20translate%28-50%2C-47%29%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M9%2C30.5%20C18%2C31.5%2029%2C33%2037%2C36%20C43%2C38.3%2047%2C41%2050%2C44%20C53%2C41%2057%2C38.3%2063%2C36%20C71%2C33%2082%2C31.5%2091%2C30.5%20C92.5%2C45.5%2087%2C60.5%2074%2C66%20C65%2C69.5%2057.5%2C66.5%2053.8%2C61.5%20C52.6%2C59.9%2051.4%2C59.3%2050%2C59.3%20C48.6%2C59.3%2047.4%2C59.9%2046.2%2C61.5%20C42.5%2C66.5%2035%2C69.5%2026%2C66%20C13%2C60.5%207.5%2C45.5%209%2C30.5%20Z%22/%3E%3Cg%20transform%3D%22translate%2829.75%2C46.5%29%20scale%281.3%29%20translate%28-29.75%2C-46.5%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M17.5%2C45%20C23%2C40%2034%2C39.7%2042%2C47%20C35.5%2C53%2023%2C52.5%2017.5%2C45%20Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2870.25%2C46.5%29%20scale%281.3%29%20translate%28-70.25%2C-46.5%29%22%3E%3Cpath%20fill%3D%22%231E5A55%22%20d%3D%22M82.5%2C45%20C77%2C40%2066%2C39.7%2058%2C47%20C64.5%2C53%2077%2C52.5%2082.5%2C45Z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -464,6 +464,7 @@ section.s.short{min-height:0;padding:104px 0}
 .tpane{margin-top:14px;border-top:1px solid rgba(158,211,200,.12);padding-top:12px;transition:opacity .5s var(--ease)}
 .tout{height:150px;overflow:auto;font-family:var(--mono);font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.82);white-space:pre-wrap;word-break:break-word}
 .ps{background:rgba(63,167,150,.22);color:var(--mint);border-radius:4px;padding:1px 5px;font-weight:600}
+.rd{background:rgba(255,255,255,.1);color:#fff;border-radius:4px;padding:1px 5px;font-weight:600}
 .rv2{background:rgba(158,211,200,.16);color:#fff;border-radius:4px;padding:1px 5px;box-shadow:inset 0 0 0 1px rgba(158,211,200,.35)}
 .tfoot{font-family:var(--mono);font-size:12px;color:var(--mint);margin-top:10px;height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .side3{display:flex;flex-direction:column;gap:14px}
@@ -471,9 +472,11 @@ section.s.short{min-height:0;padding:104px 0}
 .side3 .dim{opacity:.35;transform:translateY(4px)}
 .side3 h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 8px}
 .mapl{height:118px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.7}
-.mapl div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #e2eae7}
-.mapl div span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mapl div span:last-child{color:var(--green);font-weight:700;white-space:nowrap}
+.mapl div{display:grid;grid-template-columns:1.15fr .8fr 1.15fr;gap:10px;border-bottom:1px dashed #e2eae7}
+.mapl div span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mapl div span:nth-child(2){color:var(--green);font-weight:700}
+.mapl div.mh span{font-family:var(--font);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;border:0}
+.mapl .none{display:block;font-family:var(--font);color:var(--muted)}
 .ans{height:96px;overflow:auto;font-size:15px;line-height:1.7}
 .ans .ps{background:rgba(30,90,85,.12);color:var(--green)}
 .ans .rv2{background:rgba(63,167,150,.18);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(63,167,150,.5)}
@@ -586,7 +589,7 @@ section.s.short{min-height:0;padding:104px 0}
       <p class="lead">MaskWorth gives you a record of every AI request that runs through it: what was sent, what was masked, and who sent it.</p>
       <div class="btns"><a class="btn" href="#how">See how it works</a><a class="btn ghost" href="pricing.html">Pricing</a></div>
       <div class="facts">
-        <div><span class="lab">What it is</span><span>A masking proxy: a checkpoint between your people and the AI tool, on hardware in your own building. It detects identifiers and replaces them before a request leaves your network.</span></div>
+        <div><span class="lab">What it is</span><span>A masking proxy: a locally hosted checkpoint between your people and the AI tool. It detects identifiers and replaces them before a request leaves your network.</span></div>
         <div><span class="lab">How it's priced</span><span>From USD 100 per seat per month. A seat is one named user whose AI traffic runs through MaskWorth.</span></div>
         <div><span class="lab">Why now</span><span>AI is already in use, and today nobody can show what was sent or who sent it.</span></div>
       </div>
@@ -594,13 +597,13 @@ section.s.short{min-height:0;padding:104px 0}
     <div>
       <div class="mlead">Illustration with example data: what happens to a prompt</div>
       <div class="mockwrap">
-      <div class="mock" aria-label="Illustration: identifiers in a prompt are replaced with pseudonyms before the request leaves the network">
+      <div class="mock" aria-label="Illustration: identifiers in a prompt are replaced with labels before the request leaves the network; the model receives realistic stand-ins">
         <div class="mtop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.00 100.00" width="100" height="100"><g transform="translate(50,50) scale(1.087) translate(-50,-50)"><path fill="#1E5A55" d="M22,4 H78 C88,4 96,12 96,22 V78 C96,88 88,96 78,96 H22 C12,96 4,88 4,78 V22 C4,12 12,4 22,4 Z"/></g><g transform="translate(50,47) scale(1.12) translate(-50,-47)"><path fill="#FFFFFF" d="M9,30.5 C18,31.5 29,33 37,36 C43,38.3 47,41 50,44 C53,41 57,38.3 63,36 C71,33 82,31.5 91,30.5 C92.5,45.5 87,60.5 74,66 C65,69.5 57.5,66.5 53.8,61.5 C52.6,59.9 51.4,59.3 50,59.3 C48.6,59.3 47.4,59.9 46.2,61.5 C42.5,66.5 35,69.5 26,66 C13,60.5 7.5,45.5 9,30.5 Z"/><g transform="translate(29.75,46.5) scale(1.3) translate(-29.75,-46.5)"><path fill="#1E5A55" d="M17.5,45 C23,40 34,39.7 42,47 C35.5,53 23,52.5 17.5,45 Z"/></g><g transform="translate(70.25,46.5) scale(1.3) translate(-70.25,-46.5)"><path fill="#1E5A55" d="M82.5,45 C77,40 66,39.7 58,47 C64.5,53 77,52.5 82.5,45Z"/></g></g></svg><b>MaskWorth</b><div class="st"><i></i><span id="mSt">Detecting</span></div></div>
         <div class="mbody">
           <span class="lab">What the user types</span>
           <div class="prompt" id="mPrompt">Subject: Employment Agreement Confirmation for <span class="ent"><span class="o">Jonathan Sample</span><span class="p">PERSON #1</span></span> (SSN: <span class="ent"><span class="o">900-12-3456</span><span class="p">SSN #1</span></span>). Please confirm the compensation package paid to account <span class="ent"><span class="o">000123456789</span><span class="p">ACCOUNT #1</span></span> and the home address <span class="ent"><span class="o">100 Sample Street, Miami, FL 33131</span><span class="p">ADDR #1</span></span> on file with employer <span class="ent"><span class="o">Example Holdings LLC</span><span class="p">ORG #1</span></span> (EIN: <span class="ent"><span class="o">12-3456789</span><span class="p">EIN #1</span></span>).</div>
         </div>
-        <div class="mfoot"><span>Identifiers masked: <b id="mN">0</b> of 6</span><span class="sent" id="mSent">Masked text is sent</span></div>
+        <div class="mfoot"><span>Identifiers masked: <b id="mN">0</b> of 6</span><span class="sent" id="mSent">Sent as realistic stand-ins</span></div>
       </div>
       </div>
     </div>
@@ -676,61 +679,63 @@ section.s.short{min-height:0;padding:104px 0}
     <div class="how">
       <div>
         <ol id="hList">
-          <li data-k="0"><i>1</i><div><b>Detects identifiers.</b> Names, email addresses, account numbers and other identifiers.</div></li>
-          <li data-k="1"><i>2</i><div><b>Replaces them with consistent pseudonyms.</b> A pseudonym is a stand-in label, such as PERSON #1. The same value always gets the same label.</div></li>
-          <li data-k="2"><i>3</i><div><b>Keeps the mapping here, on your hardware.</b> It stays inside the environment where MaskWorth runs.</div></li>
-          <li data-k="3"><i>4</i><div><b>Logs every request.</b> So the firm can show what was sent and what was masked.</div></li>
-          <li data-k="4"><i>5</i><div><b>Masked text is sent.</b> Detected identifiers arrive at the model as pseudonyms.</div></li>
-          <li data-k="5"><i>6</i><div><b>The answer comes back.</b> The real values are restored in the response.</div></li>
+          <li data-k="0"><i>1</i><div><b>Detects identifiers.</b> Names, email addresses, account numbers and other identifiers. Secrets such as API keys are removed outright, not replaced.</div></li>
+          <li data-k="1"><i>2</i><div><b>Replaces them with consistent labels.</b> For example PERSON #1. The same value always gets the same label.</div></li>
+          <li data-k="2"><i>3</i><div><b>Turns each label into a realistic stand-in.</b> So the model reads natural text: a made-up name in place of PERSON #1, a made-up number in the same format in place of ACCOUNT #1.</div></li>
+          <li data-k="3"><i>4</i><div><b>Keeps the mapping here, on your hardware.</b> It stays inside the environment where MaskWorth runs.</div></li>
+          <li data-k="4"><i>5</i><div><b>Logs every request.</b> So the firm can show what was sent and what was masked.</div></li>
+          <li data-k="5"><i>6</i><div><b>The text with stand-ins is sent.</b> Detected identifiers arrive at the model as realistic stand-ins.</div></li>
+          <li data-k="6"><i>7</i><div><b>The answer comes back.</b> The stand-ins are turned back into the real values.</div></li>
         </ol>
         <div class="howctl"><button class="c" id="howPlay">Play again</button><span>Plays by itself when it comes into view.</span></div>
       </div>
       <div>
-        <div class="howcap" id="howCap" aria-live="polite"><span class="k">Step 1 of 6</span><span class="v">Detects identifiers.</span></div>
-        <svg class="dia h" viewBox="0 0 780 440" aria-label="Diagram: inside your network the user types a request; MaskWorth on your hardware detects identifiers, replaces them with pseudonyms, keeps the mapping and logs the request; the masked text is sent outside; the answer comes back with the real values restored">
-          <rect class="zone" x="1" y="10" width="512" height="338" rx="16"/>
+        <div class="howcap" id="howCap" aria-live="polite"><span class="k">Step 1 of 7</span><span class="v">Detects identifiers.</span></div>
+        <svg class="dia h" viewBox="0 0 780 500" aria-label="Diagram: inside your network the user types a request; MaskWorth on your hardware detects identifiers, replaces them with labels and then with realistic stand-ins, keeps the mapping and logs the request; the text with stand-ins is sent outside; the answer comes back with the real values restored">
+          <rect class="zone" x="1" y="10" width="512" height="398" rx="16"/>
           <text class="zl" x="20" y="36">INSIDE YOUR NETWORK</text>
-          <rect class="zone out" x="566" y="10" width="213" height="338" rx="16"/>
+          <rect class="zone out" x="566" y="10" width="213" height="398" rx="16"/>
           <text class="zl" x="584" y="36">OUTSIDE</text>
-          <rect class="card-r" x="18" y="54" width="188" height="276" rx="12"/>
+          <rect class="card-r" x="18" y="54" width="188" height="336" rx="12"/>
           <text class="t" x="34" y="84">What the user types</text>
           <text class="b" x="34" y="114">Review the engagement</text>
           <text class="b" x="34" y="134">letter for</text>
           <g class="chip" data-c="1"><rect x="34" y="148" width="118" height="30" rx="6"/><text x="45" y="168">J. Sample</text></g>
           <text class="b" x="34" y="202">account</text>
           <g class="chip" data-c="1"><rect x="34" y="214" width="140" height="30" rx="6"/><text x="45" y="234">000123456789</text></g>
-          <g class="st" data-k="5"><line x1="34" y1="262" x2="190" y2="262" stroke="#D6E1DE"/><text class="b" x="34" y="288" style="fill:#1E5A55;font-weight:600">Answer received,</text><text class="b" x="34" y="308" style="fill:#1E5A55;font-weight:600">real values restored</text></g>
+          <g class="st" data-k="6"><line x1="34" y1="318" x2="190" y2="318" stroke="#D6E1DE"/><text class="b" x="34" y="344" style="fill:#1E5A55;font-weight:600">Answer received,</text><text class="b" x="34" y="364" style="fill:#1E5A55;font-weight:600">real values restored</text></g>
           <g class="core">
-            <rect class="bg" x="238" y="48" width="258" height="288" rx="14"/>
+            <rect class="bg" x="238" y="48" width="258" height="348" rx="14"/>
             <text class="t" x="260" y="84">MaskWorth</text>
             <text class="sub" x="260" y="106">runs on your hardware</text>
             <line x1="260" y1="122" x2="474" y2="122"/>
-            <g class="st" data-k="1"><text class="mh" x="260" y="148">PSEUDONYMS</text><text class="m" x="260" y="172">J. Sample = PERSON #1</text><text class="m" x="260" y="194">000123456789 = ACCOUNT #1</text></g>
-            <g class="st" data-k="2"><rect x="260" y="210" width="214" height="30" rx="6" fill="rgba(63,167,150,.2)" stroke="#3FA796"/><text class="m" x="272" y="230" style="fill:#9ED3C8">mapping stays here</text></g>
-            <g class="st" data-k="3"><text class="mh" x="260" y="268">LOG</text><text class="m" x="260" y="292">request logged, with sender</text><text class="m" x="260" y="314">2 identifiers masked</text></g>
+            <g class="st" data-k="1"><text class="mh" x="260" y="148">LABELS</text><text class="m" x="260" y="170">J. Sample = PERSON #1</text><text class="m" x="260" y="190">000123456789 = ACCOUNT #1</text></g>
+            <g class="st" data-k="2"><text class="mh" x="260" y="220">STAND-INS</text><text class="m" x="260" y="242">PERSON #1 = Daniel Price</text><text class="m" x="260" y="262">ACCOUNT #1 = 000482913577</text></g>
+            <g class="st" data-k="3"><rect x="260" y="278" width="214" height="30" rx="6" fill="rgba(63,167,150,.2)" stroke="#3FA796"/><text class="m" x="272" y="298" style="fill:#9ED3C8">mapping stays here</text></g>
+            <g class="st" data-k="4"><text class="mh" x="260" y="336">LOG</text><text class="m" x="260" y="358">request logged, with sender</text><text class="m" x="260" y="378">2 identifiers masked</text></g>
           </g>
-          <g class="st" data-k="4">
-            <rect class="card-r" x="582" y="54" width="182" height="276" rx="12"/>
+          <g class="st" data-k="5">
+            <rect class="card-r" x="582" y="54" width="182" height="336" rx="12"/>
             <text class="t" x="596" y="84">What the model</text>
             <text class="t" x="596" y="104">receives</text>
             <text class="b" x="596" y="134">Review the engagement</text>
             <text class="b" x="596" y="154">letter for</text>
-            <g class="pchip"><rect x="596" y="166" width="104" height="30" rx="6"/><text x="607" y="186">PERSON #1</text></g>
+            <g class="pchip"><rect x="596" y="166" width="124" height="30" rx="6"/><text x="607" y="186">Daniel Price</text></g>
             <text class="b" x="596" y="220">account</text>
-            <g class="pchip"><rect x="596" y="232" width="116" height="30" rx="6"/><text x="607" y="252">ACCOUNT #1</text></g>
-            <text class="note" x="596" y="290">Detected identifiers</text><text class="note" x="596" y="308">arrive as pseudonyms</text>
+            <g class="pchip"><rect x="596" y="232" width="124" height="30" rx="6"/><text x="607" y="252">000482913577</text></g>
+            <text class="note" x="596" y="300">Detected identifiers</text><text class="note" x="596" y="318">arrive as realistic</text><text class="note" x="596" y="336">stand-ins</text>
           </g>
           <path class="ln" data-k="0" d="M206 196 L238 196"/>
-          <path class="ln" data-k="4" d="M496 196 L582 196"/>
-          <path class="ln back" data-k="5" d="M673 330 L673 390 L112 390 L112 330"/>
+          <path class="ln" data-k="5" d="M496 196 L582 196"/>
+          <path class="ln back" data-k="6" d="M673 390 L673 450 L112 450 L112 390"/>
           <path class="fl" data-k="0" d="M206 196 L238 196"/>
-          <path class="fl" data-k="4" d="M496 196 L582 196"/>
-          <path class="fl" data-k="5" style="animation-delay:.6s" d="M673 330 L673 390 L112 390 L112 330"/>
-          <g class="st" data-k="4"><text class="note" x="539" y="180" text-anchor="middle">masked text</text><text class="note" x="539" y="218" text-anchor="middle">is sent</text></g>
-          <g class="st" data-k="5"><text class="note" x="392" y="418" text-anchor="middle">The response comes back with the real values restored</text></g>
+          <path class="fl" data-k="5" d="M496 196 L582 196"/>
+          <path class="fl" data-k="6" style="animation-delay:.6s" d="M673 390 L673 450 L112 450 L112 390"/>
+          <g class="st" data-k="5"><text class="note" x="539" y="180" text-anchor="middle">stand-ins</text><text class="note" x="539" y="218" text-anchor="middle">are sent</text></g>
+          <g class="st" data-k="6"><text class="note" x="392" y="478" text-anchor="middle">The answer comes back and the stand-ins are turned back into the real values</text></g>
         </svg>
-        <svg class="dia v" viewBox="0 0 360 700" aria-hidden="true">
-          <rect class="zone" x="1" y="10" width="358" height="468" rx="16"/>
+        <svg class="dia v" viewBox="0 0 360 756" aria-hidden="true">
+          <rect class="zone" x="1" y="10" width="358" height="524" rx="16"/>
           <text class="zl" x="18" y="34">INSIDE YOUR NETWORK</text>
           <rect class="card-r" x="16" y="48" width="328" height="130" rx="12"/>
           <text class="t" x="32" y="74">What the user types</text>
@@ -738,34 +743,34 @@ section.s.short{min-height:0;padding:104px 0}
           <g class="chip" data-c="1"><rect x="32" y="108" width="100" height="26" rx="6"/><text x="41" y="126">J. Sample</text></g>
           <text class="b" x="140" y="126">account</text>
           <g class="chip" data-c="1"><rect x="196" y="108" width="122" height="26" rx="6"/><text x="205" y="126">000123456789</text></g>
-          <g class="st" data-k="5"><text class="b" x="32" y="162" style="fill:var(--green);font-weight:600">Answer received, real values restored</text></g>
+          <g class="st" data-k="6"><text class="b" x="32" y="162" style="fill:var(--green);font-weight:600">Answer received, real values restored</text></g>
           <g class="core">
-            <rect class="bg" x="16" y="214" width="328" height="250" rx="14"/>
+            <rect class="bg" x="16" y="214" width="328" height="306" rx="14"/>
             <text class="t" x="34" y="246">MaskWorth</text>
             <text class="sub" x="34" y="266">runs on your hardware</text>
             <line x1="34" y1="280" x2="326" y2="280"/>
-            <g class="st" data-k="1"><text class="mh" x="34" y="302">PSEUDONYMS</text><text class="m" x="34" y="322">J. Sample = PERSON #1</text><text class="m" x="34" y="340">000123456789 = ACCOUNT #1</text></g>
-            <g class="st" data-k="2"><rect x="34" y="352" width="180" height="28" rx="6" fill="rgba(63,167,150,.2)" stroke="#3FA796"/><text class="m" x="46" y="371" style="fill:#9ED3C8">mapping stays here</text></g>
-            <g class="st" data-k="3"><text class="mh" x="34" y="404">LOG</text><text class="m" x="34" y="424">request logged, with sender</text><text class="m" x="34" y="442">2 identifiers masked</text></g>
+            <g class="st" data-k="1"><text class="mh" x="34" y="302">LABELS</text><text class="m" x="34" y="322">J. Sample = PERSON #1</text><text class="m" x="34" y="340">000123456789 = ACCOUNT #1</text></g>
+            <g class="st" data-k="2"><text class="mh" x="34" y="364">STAND-INS</text><text class="m" x="34" y="384">PERSON #1 = Daniel Price</text><text class="m" x="34" y="402">ACCOUNT #1 = 000482913577</text></g>
+            <g class="st" data-k="3"><rect x="34" y="414" width="180" height="28" rx="6" fill="rgba(63,167,150,.2)" stroke="#3FA796"/><text class="m" x="46" y="433" style="fill:#9ED3C8">mapping stays here</text></g>
+            <g class="st" data-k="4"><text class="mh" x="34" y="462">LOG</text><text class="m" x="34" y="482">request logged, with sender</text><text class="m" x="34" y="500">2 identifiers masked</text></g>
           </g>
-          <rect class="zone out" x="1" y="520" width="358" height="176" rx="16"/>
-          <text class="zl" x="18" y="544">OUTSIDE</text>
-          <g class="st" data-k="4">
-            <rect class="card-r" x="16" y="556" width="328" height="126" rx="12"/>
-            <text class="t" x="32" y="582">What the model receives</text>
-            <text class="b" x="32" y="606">Review the engagement letter for</text>
-            <g class="pchip"><rect x="32" y="616" width="92" height="26" rx="6"/><text x="41" y="634">PERSON #1</text></g>
-            <text class="b" x="132" y="634">account</text>
-            <g class="pchip"><rect x="188" y="616" width="100" height="26" rx="6"/><text x="197" y="634">ACCOUNT #1</text></g>
-            <text class="note" x="32" y="666">Detected identifiers arrive as pseudonyms</text>
+          <rect class="zone out" x="1" y="576" width="358" height="176" rx="16"/>
+          <text class="zl" x="18" y="600">OUTSIDE</text>
+          <g class="st" data-k="5">
+            <rect class="card-r" x="16" y="612" width="328" height="126" rx="12"/>
+            <text class="t" x="32" y="638">What the model receives</text>
+            <text class="b" x="32" y="662">Review the engagement letter for</text>
+            <g class="pchip"><rect x="32" y="672" width="108" height="26" rx="6"/><text x="41" y="690">Daniel Price</text></g>
+            <text class="b" x="146" y="690">account</text>
+            <g class="pchip"><rect x="202" y="672" width="122" height="26" rx="6"/><text x="211" y="690">000482913577</text></g>
+            <text class="note" x="32" y="722">Detected identifiers arrive as realistic stand-ins</text>
           </g>
           <path class="ln" data-k="0" d="M120 178 L120 214"/>
-          <path class="ln" data-k="4" d="M120 464 L120 556"/>
-          <path class="ln back" data-k="5" d="M344 606 L352 606 L352 112 L344 112"/>
+          <path class="ln" data-k="5" d="M120 520 L120 612"/>
+          <path class="ln back" data-k="6" d="M344 662 L352 662 L352 112 L344 112"/>
           <path class="fl" data-k="0" d="M120 178 L120 214"/>
-          <path class="fl" data-k="4" d="M120 464 L120 556"/>
-          <g class="st" data-k="4"><text class="note" x="132" y="505">masked text is sent</text></g>
-          
+          <path class="fl" data-k="5" d="M120 520 L120 612"/>
+          <g class="st" data-k="5"><text class="note" x="132" y="561">stand-ins are sent</text></g>
         </svg>
       </div>
     </div>
@@ -776,8 +781,8 @@ section.s.short{min-height:0;padding:104px 0}
   <div class="stars" aria-hidden="true" style="opacity:.35"></div>
   <div class="in" style="position:relative">
     <div class="hd rv"><div class="eyebrow"><b>05</b> Try it</div><h2>See what <em class="i">leaves your network</em></h2>
-      <p>Pick an example or type your own sentence. Identifiers are replaced by labels before the text is sent. The answer comes back with the real values restored.</p></div>
-    <div class="trysteps rv" id="trySteps"><span>1 Detect</span><span>2 Replace</span><span>3 Keep the mapping</span><span>4 Send</span><span>5 Restore</span></div>
+      <p>Pick an example or type your own sentence. Identifiers are replaced by labels, and each label by a realistic stand-in, before the text is sent. Secrets such as API keys are removed. The answer comes back with the real values restored.</p></div>
+    <div class="trysteps rv" id="trySteps"><span>1 Detect</span><span>2 Label</span><span>3 Stand-in</span><span>4 Send</span><span>5 Restore</span></div>
     <div class="trygrid" id="demo">
       <div class="term rv">
         <div class="thead"><div class="dots"><i></i><i></i><i></i></div><div class="ttl">AI tool &middot; via MaskWorth</div><div class="tag"><i></i>illustration</div></div>
@@ -820,7 +825,7 @@ section.s.short{min-height:0;padding:104px 0}
             <div class="cview" data-v="raw"><div class="chead"><span class="ring"></span>Raw ingest context</div><div class="rawt">"Subject: Employment Agreement Confirmation for Jonathan Sample (SSN: 900-12-3456). Please confirm the compensation package paid to account 000123456789 and the home address 100 Sample Street, Miami, FL 33131 on file with employer Example Holdings LLC (EIN: 12-3456789)."</div></div>
             <div class="cview on" data-v="det"><div class="chead"><span class="ring"></span>Real-time detection <span id="cCount">&bull; 6 Entities Detected</span><button class="copy" id="copyP">Copy Payload</button></div><div class="ctext" id="cText">"Subject: Employment Agreement Confirmation for <span class="chip2" tabindex="0">Jonathan Sample<small>PERSON #1</small><span class="tip"><b>PERSON #1</b>Person name</span></span> (SSN: <span class="chip2" tabindex="0">900-12-3456<small>SSN #1</small><span class="tip"><b>SSN #1</b>Social Security number</span></span>). Please confirm the compensation package paid to account <span class="chip2" tabindex="0">000123456789<small>ACCOUNT #1</small><span class="tip"><b>ACCOUNT #1</b>Account number</span></span> and the home address <span class="chip2" tabindex="0">100 Sample Street, Miami, FL 33131<small>ADDR #1</small><span class="tip"><b>ADDR #1</b>Address</span></span> on file with employer <span class="chip2" tabindex="0">Example Holdings LLC<small>ORG #1</small><span class="tip"><b>ORG #1</b>Organization</span></span> (EIN: <span class="chip2" tabindex="0">12-3456789<small>EIN #1</small><span class="tip"><b>EIN #1</b>Employer Identification Number</span></span>)."</div></div>
           </div>
-          <div class="ccap"><span id="cCap">Names and numbers are replaced by labels, such as PERSON #1, before the request leaves your network. Hover a highlighted value to see its type. Example data.</span></div>
+          <div class="ccap"><span id="cCap">Each detected value gets a label, such as PERSON #1. Before the request leaves your network, each label becomes a realistic stand-in. Hover a highlighted value to see its type. Example data.</span></div>
         </div>
       </div>
     </div>
@@ -846,9 +851,9 @@ section.s.short{min-height:0;padding:104px 0}
         <div class="report" id="report">
           <div class="rtop"><b>Audit report</b><span>Illustration</span></div>
           <div class="rrow h"><div>What was sent</div><div>What was masked</div><div>Sent by</div></div>
-          <div class="rrow"><div class="rq">Review the engagement letter for PERSON #1, account ACCOUNT #1</div><div class="mk"><span>PERSON</span><span>ACCOUNT</span></div><div class="by">Seat 04</div></div>
-          <div class="rrow"><div class="rq">Employment Agreement Confirmation for PERSON #1 (SSN: SSN #1)</div><div class="mk"><span>PERSON</span><span>SSN</span><span>ADDR</span><span>ORG</span><span>EIN</span><span>ACCOUNT</span></div><div class="by">Seat 11</div></div>
-          <div class="rrow"><div class="rq">Summarize the attached notes for ORG #1</div><div class="mk"><span>ORG</span></div><div class="by">Seat 04</div></div>
+          <div class="rrow"><div class="rq">Review the engagement letter for Daniel Price, account 000482913577</div><div class="mk"><span>PERSON</span><span>ACCOUNT</span></div><div class="by">Seat 04</div></div>
+          <div class="rrow"><div class="rq">Employment Agreement Confirmation for Daniel Price (SSN: 900-45-7812)</div><div class="mk"><span>PERSON</span><span>SSN</span><span>ADDR</span><span>ORG</span><span>EIN</span><span>ACCOUNT</span></div><div class="by">Seat 11</div></div>
+          <div class="rrow"><div class="rq">Draft a reply about the payment from Northwind Partners LLC</div><div class="mk"><span>ORG</span></div><div class="by">Seat 04</div></div>
           <div class="rfoot">Illustration with example data.</div>
         </div>
       </div>
@@ -959,7 +964,7 @@ section.s.short{min-height:0;padding:104px 0}
     <div class="faq">
       <div class="rv"><div class="eyebrow"><b>13</b> Questions</div><h2 style="font-size:clamp(34px,4.1vw,54px);line-height:1.06;margin:0">What firms <em class="i">ask first</em></h2></div>
       <div class="qa rv d1">
-        <details open><summary>Does client data leave our building?<i></i></summary><p>Before a request leaves the network, MaskWorth detects names, email addresses, account numbers and other identifiers and replaces them with consistent pseudonyms. The masked text is sent to the model; the real values are restored in the answer. The mapping between the two stays on your hardware. Detection is not infallible, which is why every deployment starts with a measurement on your own data.</p></details>
+        <details open><summary>Does client data leave our building?<i></i></summary><p>Before a request leaves the network, MaskWorth detects names, email addresses, account numbers and other identifiers and replaces them with consistent labels, which are then turned into realistic stand-ins. The text with stand-ins is sent to the model; the real values are restored in the answer. Secrets such as API keys are removed, not replaced. The mapping between the two stays on your hardware. Detection is not infallible, which is why every deployment starts with a measurement on your own data.</p></details>
         <details><summary>Is detection perfect?<i></i></summary><p>No. Detection rates depend on language and document type, so they are measured on your own data rather than quoted as a generic figure. The figure that counts is the one measured on your own sample in the trial month, and the acceptance criteria are written against it.</p></details>
         <details><summary>What if the trial month does not meet the criteria?<i></i></summary><p>You can end the agreement at the close of the trial month. What you then owe is set out under Getting started above and in the <a href="pricing.html#terms" style="color:var(--green)">terms</a>.</p></details>
         <details><summary>Do you resell model usage?<i></i></summary><p>No. Model usage runs under your own agreement with the model provider. MaskWorth does not resell it or charge for it.</p></details>
@@ -1101,13 +1106,14 @@ function setHow(act, done){
   hLines.forEach(l => lineState(l, +l.dataset.k <= act));
   hChips.forEach(c => c.classList.toggle('hl', act >= 0));
   const cur = hItems[Math.max(0, act)];
-  if (cur){ $('howCap').querySelector('.k').textContent = 'Step ' + (Math.max(0,act)+1) + ' of 6'; $('howCap').querySelector('.v').textContent = cur.querySelector('b').textContent; }
+  if (cur){ $('howCap').querySelector('.k').textContent = 'Step ' + (Math.max(0,act)+1) + ' of ' + hItems.length; $('howCap').querySelector('.v').textContent = cur.querySelector('b').textContent; }
 }
 let howTimers = [];
 function playHow(){
   howTimers.forEach(clearTimeout); howTimers = []; setHow(-1, false); $('how').classList.remove('done');
-  for (let k = 0; k < 6; k++) howTimers.push(setTimeout(() => setHow(k, false), T(400 + k * 1400)));
-  howTimers.push(setTimeout(() => { setHow(5, true); $('how').classList.add('done'); state.how = true; }, T(400 + 6 * 1400)));
+  const N = hItems.length;
+  for (let k = 0; k < N; k++) howTimers.push(setTimeout(() => setHow(k, false), T(400 + k * 1300)));
+  howTimers.push(setTimeout(() => { setHow(N - 1, true); $('how').classList.add('done'); state.how = true; }, T(400 + N * 1300)));
 }
 setHow(-1, false);
 $('howPlay').addEventListener('click', playHow);
@@ -1129,7 +1135,7 @@ function playEvidence(){
   evTimers.push(setTimeout(() => { chips[0].classList.add('act'); state.evidence = true; }, T(1700 + chips.length * 380 + 300)));
   evTimers.push(setTimeout(() => chips[0].classList.remove('act'), T(1700 + chips.length * 380 + 2600)));
 }
-if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Names and numbers are replaced by labels, such as PERSON #1, before the request leaves your network. Tap a highlighted value to see its type. Example data.';
+if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Each detected value gets a label, such as PERSON #1. Before the request leaves your network, each label becomes a realistic stand-in. Tap a highlighted value to see its type. Example data.';
 $('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'PERSON #1').replace(/900-12-3456/,'SSN #1').replace(/000123456789/,'ACCOUNT #1').replace(/100 Sample Street, Miami, FL 33131/,'ADDR #1').replace(/Example Holdings LLC/,'ORG #1').replace(/12-3456789/,'EIN #1'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
 chips.forEach(c => c.classList.add('on'));
 once($('console'), playEvidence, .5);
@@ -1168,10 +1174,12 @@ if ($('demo')) {
   const EX = [
     ['Engagement letter', 'Review the engagement letter for Jonathan Sample, account 000123456789, and list anything that is missing.'],
     ['Employment confirmation', 'Subject: Employment Agreement Confirmation for Jonathan Sample (SSN: 900-12-3456). Please confirm the compensation package paid to account 000123456789 and the home address 100 Sample Street, Miami, FL 33131 on file with employer Example Holdings LLC (EIN: 12-3456789).'],
-    ['Client email', 'Draft a short reply to Jonathan Sample (jonathan.sample@example.com) about the payment from Example Holdings LLC to account 000123456789.']
+    ['Client email', 'Draft a short reply to Jonathan Sample (jonathan.sample@example.com) about the payment from Example Holdings LLC to account 000123456789.'],
+    ['Request with a key', 'Why does this request fail? It uses the key sk-test-4fJ9qLx2Vm7RtZ8w for the export of account 000123456789.']
   ];
-  const STOP = new Set('Subject Employment Agreement Confirmation Please Review Draft Dear Hello Thanks Regards The This That Summarize Tax Return Form Invoice Account Payment Letter Engagement Client Firm Report Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March April May June July August September October November December United States New York Street Avenue Road Internal Revenue Service Social Security Kind Best Many Could Would Should Can Will'.split(' '));
+  const STOP = new Set('Subject Employment Agreement Confirmation Please Review Draft Dear Hello Thanks Regards The This That Summarize Tax Return Form Invoice Account Payment Letter Engagement Client Firm Report Why Does It Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March April May June July August September October November December United States New York Street Avenue Road Internal Revenue Service Social Security Kind Best Many Could Would Should Can Will'.split(' '));
   const PAT = [
+    ['SECRET', /\b(?:sk|pk|rk)[-_](?:live[-_]|test[-_])?[A-Za-z0-9]{12,}\b/g],
     ['EMAIL', /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g],
     ['SSN', /\b\d{3}-\d{2}-\d{4}\b/g],
     ['EIN', /\b\d{2}-\d{7}\b/g],
@@ -1180,6 +1188,17 @@ if ($('demo')) {
     ['ORG', /\b(?:[A-Z][A-Za-z&]+ ){1,3}(?:LLC|Inc\.?|Ltd\.?|LLP|Corp\.?)(?![A-Za-z])/g],
     ['PERSON', /\b[A-Z][a-z]+(?: [A-Z]\.)? [A-Z][a-z]+(?:-[A-Z][a-z]+)?\b/g]
   ];
+  // made-up stand-ins, same kind and format as the original
+  const POOL = {PERSON: ['Daniel Price', 'Laura Bennett', 'Marcus Hale', 'Olivia Grant'], ORG: ['Northwind Partners LLC', 'Harbor Lane Group LLC', 'Bluefield Advisors LLC'],
+    EMAIL: ['daniel.price@example.org', 'l.bennett@example.net', 'm.hale@example.org'], ADDR: ['48 Maple Court, Riverside, FL 33000', '12 Cedar Lane, Lakeview, FL 33001']};
+  const FIX = {ACCOUNT: ['000482913577', '000731906248'], SSN: ['900-45-7812', '900-67-2193'], EIN: ['98-7654321', '97-1203456']};
+  function digitsLike(v, n){ let seed = n * 7919 + v.length * 104729, out = ''; for (const c of v){ if (/\d/.test(c)){ seed = (seed * 16807) % 2147483647; out += seed % 10; } else out += c; } return out; }
+  function standIn(type, v, n){
+    if (type === 'SECRET') return '[REDACTED]';
+    if (POOL[type]) return POOL[type][(n - 1) % POOL[type].length];
+    if (FIX[type]){ const f = FIX[type][(n - 1) % FIX[type].length]; return f.length === v.length ? f : digitsLike(v, n); }
+    return digitsLike(v, n);
+  }
   const esc = t => t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
   function detect(text){
     let all = [];
@@ -1189,47 +1208,56 @@ if ($('demo')) {
     all.sort((a, b) => a.s - b.s || (b.e - b.s) - (a.e - a.s));
     const keep = []; let end = -1; all.forEach(x => { if (x.s >= end){ keep.push(x); end = x.e; } });
     const map = new Map(), cnt = {};
-    keep.forEach(x => { if (!map.has(x.v)){ cnt[x.type] = (cnt[x.type] || 0) + 1; map.set(x.v, x.type + ' #' + cnt[x.type]); } x.label = map.get(x.v); });
+    keep.forEach(x => { if (!map.has(x.v)){ cnt[x.type] = (cnt[x.type] || 0) + 1; const n = cnt[x.type]; map.set(x.v, {type: x.type, label: x.type === 'SECRET' ? 'removed' : x.type + ' #' + n, stand: standIn(x.type, x.v, n)}); } x.m = map.get(x.v); });
     return {hits: keep, map};
   }
-  function render(text, hits, mode){
+  function render(text, hits){
     let out = '', k = 0;
-    hits.forEach(h => { out += esc(text.slice(k, h.s)); out += mode === 'mask' ? '<span class="ps">' + h.label + '</span>' : '<span class="rv2">' + esc(h.v) + '</span>'; k = h.e; });
+    hits.forEach(h => { out += esc(text.slice(k, h.s)); out += h.m.type === 'SECRET' ? '<span class="rd">[REDACTED]</span>' : '<span class="ps">' + esc(h.m.stand) + '</span>'; k = h.e; });
     return out + esc(text.slice(k));
   }
-  function answerFor(map){
-    const labels = [...map.values()];
-    if (!labels.length) return null;
-    const who = labels.find(l => l.startsWith('PERSON')) || labels[0];
-    const rest = labels.filter(l => l !== who);
-    return 'Here is a draft for ' + who + '.' + (rest.length ? ' It uses ' + rest.join(', ') + ' exactly as you gave them.' : '');
+  function answerParts(map){
+    const vals = [...map.entries()].filter(([, m]) => m.type !== 'SECRET');
+    if (!vals.length) return null;
+    const who = vals.find(([, m]) => m.type === 'PERSON') || vals[0];
+    const rest = vals.filter(x => x !== who);
+    return {who, rest};
+  }
+  function answerHtml(parts, real){
+    if (!parts) return real ? 'Nothing to restore.' : 'The model received the text without identifiers found by these patterns.';
+    const cls = real ? 'rv2' : 'ps', val = x => '<span class="' + cls + '">' + esc(real ? x[0] : x[1].stand) + '</span>';
+    if (parts.who[1].type !== 'PERSON') return 'Here is the answer. It uses ' + [parts.who, ...parts.rest].map(val).join(', ') + ' exactly as you gave them.';
+    return 'Here is a draft for ' + val(parts.who) + '.' + (parts.rest.length ? ' It uses ' + parts.rest.map(val).join(', ') + ' exactly as you gave them.' : '');
   }
   const inp = $('tryIn'), steps = [...document.querySelectorAll('#trySteps span')];
   const panes = [$('tryOutP'), $('tryMapP'), $('tryAnsP'), $('tryResP')];
-  let timers = [], exI = 0;
+  let timers = [];
   $('tryEx').innerHTML = EX.map((e, i) => '<button type="button" data-i="' + i + '">' + e[0] + '</button>').join('');
   const exBtns = [...$('tryEx').querySelectorAll('button')];
   function setStep(n){ steps.forEach((x, i) => x.classList.toggle('on', i < n)); }
   function run(animate){
     timers.forEach(clearTimeout); timers = [];
-    const text = inp.value, r = detect(text), ans = answerFor(r.map);
-    const masked = render(text, r.hits, 'mask');
-    const mapHtml = r.hits.length ? [...r.map.entries()].map(([v, l]) => '<div><span>' + esc(v) + '</span><span>' + l + '</span></div>').join('') : '<div><span>No identifiers found by the simple patterns on this page.</span><span></span></div>';
-    const back = ans ? ans.replace(/(PERSON|EMAIL|SSN|EIN|ADDR|ACCOUNT|ORG) #\d+/g, l => { const v = [...r.map.entries()].find(e => e[1] === l); return '<span class="rv2">' + esc(v ? v[0] : l) + '</span>'; }) : 'Nothing to restore.';
-    const ansHtml = ans ? ans.replace(/(PERSON|EMAIL|SSN|EIN|ADDR|ACCOUNT|ORG) #\d+/g, l => '<span class="ps">' + l + '</span>') : 'The model received the text as typed.';
+    const text = inp.value, r = detect(text), parts = answerParts(r.map);
+    const secrets = r.hits.filter(h => h.m.type === 'SECRET').length, ids = r.hits.length - secrets;
+    const mapHead = '<div class="mh"><span>Original</span><span>Label</span><span>Stand-in</span></div>';
+    const kept = [...r.map.entries()].filter(([, m]) => m.type !== 'SECRET');
+    const labelRows = kept.map(([v, m]) => '<div><span>' + esc(v) + '</span><span>' + m.label + '</span><span></span></div>').join('');
+    const fullRows = kept.map(([v, m]) => '<div><span>' + esc(v) + '</span><span>' + m.label + '</span><span>' + esc(m.stand) + '</span></div>').join('');
+    const none = '<span class="none">No identifiers found by the simple patterns on this page.</span>';
+    const summary = ids + ' identifier' + (ids === 1 ? '' : 's') + (secrets ? ', ' + secrets + ' secret removed' : '');
     const acts = [
-      () => { setStep(1); $('tryFoot').textContent = r.hits.length + ' identifier' + (r.hits.length === 1 ? '' : 's') + ' found'; },
-      () => { setStep(2); $('tryOut').innerHTML = masked; panes[0].style.opacity = 1; },
-      () => { setStep(3); $('tryMap').innerHTML = mapHtml; panes[1].classList.remove('dim'); },
-      () => { setStep(4); $('tryAns').innerHTML = ansHtml; panes[2].classList.remove('dim'); $('tryFoot').textContent = r.hits.length + ' masked, masked text sent'; },
-      () => { setStep(5); $('tryRes').innerHTML = back; panes[3].classList.remove('dim'); state.demo = true; }
+      () => { setStep(1); $('tryFoot').textContent = summary + ' found'; },
+      () => { setStep(2); $('tryMap').innerHTML = kept.length ? mapHead + labelRows : none; panes[1].classList.remove('dim'); },
+      () => { setStep(3); $('tryMap').innerHTML = kept.length ? mapHead + fullRows : none; $('tryOut').innerHTML = render(text, r.hits); panes[0].style.opacity = 1; },
+      () => { setStep(4); $('tryAns').innerHTML = answerHtml(parts, false); panes[2].classList.remove('dim'); $('tryFoot').textContent = summary + ', sent with stand-ins'; },
+      () => { setStep(5); $('tryRes').innerHTML = answerHtml(parts, true); panes[3].classList.remove('dim'); state.demo = true; }
     ];
     if (!animate){ acts.forEach(f => f()); return; }
     setStep(0); $('tryOut').innerHTML = esc(text); panes[0].style.opacity = .45; panes.slice(1).forEach(x => x.classList.add('dim'));
     $('tryMap').innerHTML = ''; $('tryAns').innerHTML = ''; $('tryRes').innerHTML = ''; $('tryFoot').textContent = 'scanning';
     acts.forEach((f, i) => timers.push(setTimeout(f, T(500 + i * 900))));
   }
-  function pick(i){ exI = i; exBtns.forEach((b, k) => b.classList.toggle('on', k === i)); inp.value = EX[i][1]; run(true); }
+  function pick(i){ exBtns.forEach((b, k) => b.classList.toggle('on', k === i)); inp.value = EX[i][1]; run(true); }
   exBtns.forEach((b, i) => b.addEventListener('click', () => pick(i)));
   let deb = null; inp.addEventListener('input', () => { exBtns.forEach(b => b.classList.remove('on')); clearTimeout(deb); deb = setTimeout(() => run(true), 600); });
   inp.value = EX[1][1]; exBtns[1].classList.add('on'); run(false); state.demo = false;
@@ -1238,7 +1266,7 @@ if ($('demo')) {
 }
 
 // ---------- QA hooks (engine/qa.js) ----------
-window.QA_PAUSE = {stmt: 3800, how: 10500, try: 6500, evidence: 5200, cost: 2600};
+window.QA_PAUSE = {stmt: 3800, how: 11500, try: 6500, evidence: 5200, cost: 2600};
 window.QA_END = () => { const r = {};
   if ($('quote')) r.quote = state.quote && [...document.querySelectorAll('#quote .w')].every(w => w.classList.contains('on'));
   if ($('how')) r.how = state.how && $('how').classList.contains('done');
