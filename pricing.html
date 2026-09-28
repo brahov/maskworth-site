@@ -130,6 +130,10 @@ section.s>.in{width:100%}
 .ent.sw .o{display:none}
 .ent.sw .p{display:inline-block}
 .ent.sw.new .p{animation:pop .5s var(--ease)}
+.ent .s{display:none;background:var(--mint);color:var(--ink);font-weight:600;padding:1px 7px;border-radius:5px;white-space:nowrap;line-height:1.4}
+.ent.si .p{display:none}
+.ent.si .s{display:inline-block}
+.ent.si.new .s{animation:pop .5s var(--ease)}
 @keyframes pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
 .mfoot{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:14px;padding:14px 22px;border-top:1px solid var(--border);background:var(--mist);font-size:13px;color:var(--muted)}
 .mfoot b{color:var(--ink);font-variant-numeric:tabular-nums}
@@ -834,16 +838,21 @@ let stt = new Array(NE).fill(''), mRun = 0;
 function paint(){ const d = document.createElement('div'); d.innerHTML = TPL; [...d.querySelectorAll('.ent')].forEach((e, i) => { if (stt[i]) e.className = 'ent ' + stt[i]; }); pr.replaceChildren(...d.childNodes); }
 function mockLoop(){
   const my = ++mRun;
-  stt = new Array(NE).fill(''); paint(); $('mN').textContent = '0'; $('mSent').classList.remove('on'); $('mSt').textContent = 'Detecting';
+  stt = new Array(NE).fill(''); paint(); $('mN').textContent = '0'; $('mSent').classList.remove('on'); $('mSt').textContent = 'Detecting'; $('mLab').textContent = 'What the user types';
   for (let i = 0; i < NE; i++){
     setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit'; paint(); } }, T(700 + i*520));
     setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit sw new'; paint(); $('mN').textContent = i + 1; } }, T(700 + i*520 + 900));
   }
-  const end = 700 + (NE-1)*520 + 900;
+  const lab = 700 + (NE-1)*520 + 900;
+  setTimeout(() => { if (my === mRun){ $('mSt').textContent = 'Adding stand-ins'; $('mLab').textContent = 'What the model receives'; } }, T(lab + 700));
+  for (let i = 0; i < NE; i++){
+    setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit sw si new'; paint(); } }, T(lab + 1100 + i*260));
+  }
+  const end = lab + 1100 + (NE-1)*260;
   setTimeout(() => { if (my === mRun){ $('mSent').classList.add('on'); $('mSt').textContent = 'Request logged'; } }, T(end + 500));
   if (!reduce) setTimeout(() => { if (my === mRun) mockLoop(); }, end + 5200);
 }
-let pW = 0; function reservePrompt(){ if (Math.abs(pr.offsetWidth - pW) < 2) return; pW = pr.offsetWidth; const keep = stt; stt = new Array(NE).fill(''); paint(); pr.style.height = ''; pr.style.height = pr.offsetHeight + 'px'; stt = keep; paint(); }
+let pW = 0; function reservePrompt(){ if (Math.abs(pr.offsetWidth - pW) < 2) return; pW = pr.offsetWidth; const keep = stt; pr.style.height = ''; let h = 0; for (const v of ['', 'hit sw', 'hit sw si']){ stt = new Array(NE).fill(v); paint(); h = Math.max(h, pr.offsetHeight); } pr.style.height = h + 'px'; stt = keep; paint(); }
 reservePrompt(); addEventListener('resize', reservePrompt); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { pW = 0; reservePrompt(); });
 once(document.querySelector('.mock'), mockLoop, .5);
 }
@@ -953,7 +962,7 @@ function playEvidence(){
   evTimers.push(setTimeout(() => chips[0].classList.remove('act'), T(1700 + chips.length * 380 + 2600)));
 }
 if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Each detected value gets a label, such as PERSON #1. Before the request leaves your network, each label becomes a realistic stand-in. Tap a highlighted value to see its type. Example data.';
-$('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'PERSON #1').replace(/900-12-3456/,'SSN #1').replace(/000123456789/,'ACCOUNT #1').replace(/100 Sample Street, Miami, FL 33131/,'ADDR #1').replace(/Example Holdings LLC/,'ORG #1').replace(/12-3456789/,'EIN #1'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
+$('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'Daniel Price').replace(/900-12-3456/,'900-45-7812').replace(/000123456789/,'000482913577').replace(/100 Sample Street, Miami, FL 33131/,'48 Maple Court, Riverside, FL 33000').replace(/Example Holdings LLC/,'Northwind Partners LLC').replace(/12-3456789/,'98-7654321'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
 chips.forEach(c => c.classList.add('on'));
 once($('console'), playEvidence, .5);
 

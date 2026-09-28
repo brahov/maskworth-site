@@ -130,6 +130,10 @@ section.s>.in{width:100%}
 .ent.sw .o{display:none}
 .ent.sw .p{display:inline-block}
 .ent.sw.new .p{animation:pop .5s var(--ease)}
+.ent .s{display:none;background:var(--mint);color:var(--ink);font-weight:600;padding:1px 7px;border-radius:5px;white-space:nowrap;line-height:1.4}
+.ent.si .p{display:none}
+.ent.si .s{display:inline-block}
+.ent.si.new .s{animation:pop .5s var(--ease)}
 @keyframes pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
 .mfoot{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:14px;padding:14px 22px;border-top:1px solid var(--border);background:var(--mist);font-size:13px;color:var(--muted)}
 .mfoot b{color:var(--ink);font-variant-numeric:tabular-nums}
@@ -730,8 +734,8 @@ p{text-wrap:pretty}
       <div class="mock" aria-label="Illustration: identifiers in a prompt are replaced with labels before the request leaves the network; the model receives realistic stand-ins">
         <div class="mtop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.00 100.00" width="100" height="100"><g transform="translate(50,50) scale(1.087) translate(-50,-50)"><path fill="#1E5A55" d="M22,4 H78 C88,4 96,12 96,22 V78 C96,88 88,96 78,96 H22 C12,96 4,88 4,78 V22 C4,12 12,4 22,4 Z"/></g><g transform="translate(50,47) scale(1.12) translate(-50,-47)"><path fill="#FFFFFF" d="M9,30.5 C18,31.5 29,33 37,36 C43,38.3 47,41 50,44 C53,41 57,38.3 63,36 C71,33 82,31.5 91,30.5 C92.5,45.5 87,60.5 74,66 C65,69.5 57.5,66.5 53.8,61.5 C52.6,59.9 51.4,59.3 50,59.3 C48.6,59.3 47.4,59.9 46.2,61.5 C42.5,66.5 35,69.5 26,66 C13,60.5 7.5,45.5 9,30.5 Z"/><g transform="translate(29.75,46.5) scale(1.3) translate(-29.75,-46.5)"><path fill="#1E5A55" d="M17.5,45 C23,40 34,39.7 42,47 C35.5,53 23,52.5 17.5,45 Z"/></g><g transform="translate(70.25,46.5) scale(1.3) translate(-70.25,-46.5)"><path fill="#1E5A55" d="M82.5,45 C77,40 66,39.7 58,47 C64.5,53 77,52.5 82.5,45Z"/></g></g></svg><b>MaskWorth</b><div class="st"><i></i><span id="mSt">Detecting</span></div></div>
         <div class="mbody">
-          <span class="lab">What the user types</span>
-          <div class="prompt" id="mPrompt">Subject: Employment Agreement Confirmation for <span class="ent"><span class="o">Jonathan Sample</span><span class="p">PERSON #1</span></span> (SSN: <span class="ent"><span class="o">900-12-3456</span><span class="p">SSN #1</span></span>). Please confirm the compensation package paid to account <span class="ent"><span class="o">000123456789</span><span class="p">ACCOUNT #1</span></span> and the home address <span class="ent"><span class="o">100 Sample Street, Miami, FL 33131</span><span class="p">ADDR #1</span></span> on file with employer <span class="ent"><span class="o">Example Holdings LLC</span><span class="p">ORG #1</span></span> (EIN: <span class="ent"><span class="o">12-3456789</span><span class="p">EIN #1</span></span>).</div>
+          <span class="lab" id="mLab">What the user types</span>
+          <div class="prompt" id="mPrompt">Subject: Employment Agreement Confirmation for <span class="ent"><span class="o">Jonathan Sample</span><span class="p">PERSON #1</span><span class="s">Daniel Price</span></span> (SSN: <span class="ent"><span class="o">900-12-3456</span><span class="p">SSN #1</span><span class="s">900-45-7812</span></span>). Please confirm the compensation package paid to account <span class="ent"><span class="o">000123456789</span><span class="p">ACCOUNT #1</span><span class="s">000482913577</span></span> and the home address <span class="ent"><span class="o">100 Sample Street, Miami, FL 33131</span><span class="p">ADDR #1</span><span class="s">48 Maple Court, Riverside, FL 33000</span></span> on file with employer <span class="ent"><span class="o">Example Holdings LLC</span><span class="p">ORG #1</span><span class="s">Northwind Partners LLC</span></span> (EIN: <span class="ent"><span class="o">12-3456789</span><span class="p">EIN #1</span><span class="s">98-7654321</span></span>).</div>
         </div>
         <div class="mfoot"><span>Identifiers masked: <b id="mN">0</b> of 6</span><span class="sent" id="mSent">Sent as realistic stand-ins</span></div>
       </div>
@@ -1153,16 +1157,21 @@ let stt = new Array(NE).fill(''), mRun = 0;
 function paint(){ const d = document.createElement('div'); d.innerHTML = TPL; [...d.querySelectorAll('.ent')].forEach((e, i) => { if (stt[i]) e.className = 'ent ' + stt[i]; }); pr.replaceChildren(...d.childNodes); }
 function mockLoop(){
   const my = ++mRun;
-  stt = new Array(NE).fill(''); paint(); $('mN').textContent = '0'; $('mSent').classList.remove('on'); $('mSt').textContent = 'Detecting';
+  stt = new Array(NE).fill(''); paint(); $('mN').textContent = '0'; $('mSent').classList.remove('on'); $('mSt').textContent = 'Detecting'; $('mLab').textContent = 'What the user types';
   for (let i = 0; i < NE; i++){
     setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit'; paint(); } }, T(700 + i*520));
     setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit sw new'; paint(); $('mN').textContent = i + 1; } }, T(700 + i*520 + 900));
   }
-  const end = 700 + (NE-1)*520 + 900;
+  const lab = 700 + (NE-1)*520 + 900;
+  setTimeout(() => { if (my === mRun){ $('mSt').textContent = 'Adding stand-ins'; $('mLab').textContent = 'What the model receives'; } }, T(lab + 700));
+  for (let i = 0; i < NE; i++){
+    setTimeout(() => { if (my === mRun){ stt = stt.map(x => x.replace(' new', '')); stt[i] = 'hit sw si new'; paint(); } }, T(lab + 1100 + i*260));
+  }
+  const end = lab + 1100 + (NE-1)*260;
   setTimeout(() => { if (my === mRun){ $('mSent').classList.add('on'); $('mSt').textContent = 'Request logged'; } }, T(end + 500));
   if (!reduce) setTimeout(() => { if (my === mRun) mockLoop(); }, end + 5200);
 }
-let pW = 0; function reservePrompt(){ if (Math.abs(pr.offsetWidth - pW) < 2) return; pW = pr.offsetWidth; const keep = stt; stt = new Array(NE).fill(''); paint(); pr.style.height = ''; pr.style.height = pr.offsetHeight + 'px'; stt = keep; paint(); }
+let pW = 0; function reservePrompt(){ if (Math.abs(pr.offsetWidth - pW) < 2) return; pW = pr.offsetWidth; const keep = stt; pr.style.height = ''; let h = 0; for (const v of ['', 'hit sw', 'hit sw si']){ stt = new Array(NE).fill(v); paint(); h = Math.max(h, pr.offsetHeight); } pr.style.height = h + 'px'; stt = keep; paint(); }
 reservePrompt(); addEventListener('resize', reservePrompt); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { pW = 0; reservePrompt(); });
 once(document.querySelector('.mock'), mockLoop, .5);
 }
@@ -1272,7 +1281,7 @@ function playEvidence(){
   evTimers.push(setTimeout(() => chips[0].classList.remove('act'), T(1700 + chips.length * 380 + 2600)));
 }
 if (!matchMedia('(hover:hover)').matches) $('cCap').textContent = 'Each detected value gets a label, such as PERSON #1. Before the request leaves your network, each label becomes a realistic stand-in. Tap a highlighted value to see its type. Example data.';
-$('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'PERSON #1').replace(/900-12-3456/,'SSN #1').replace(/000123456789/,'ACCOUNT #1').replace(/100 Sample Street, Miami, FL 33131/,'ADDR #1').replace(/Example Holdings LLC/,'ORG #1').replace(/12-3456789/,'EIN #1'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
+$('copyP').addEventListener('click', () => { const t = document.querySelector('.cview[data-v="raw"] .rawt').textContent.replace(/Jonathan Sample/,'Daniel Price').replace(/900-12-3456/,'900-45-7812').replace(/000123456789/,'000482913577').replace(/100 Sample Street, Miami, FL 33131/,'48 Maple Court, Riverside, FL 33000').replace(/Example Holdings LLC/,'Northwind Partners LLC').replace(/12-3456789/,'98-7654321'); try { navigator.clipboard.writeText(t).then(() => { $('copyP').textContent = 'Copied'; setTimeout(() => $('copyP').textContent = 'Copy Payload', 1600); }).catch(() => {}); } catch (e) {} });
 chips.forEach(c => c.classList.add('on'));
 once($('console'), playEvidence, .5);
 
